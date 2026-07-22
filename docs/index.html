@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ChoroplethMap-Bench evaluates whether choropleth maps improve foundation-model spatial understanding.">
+  <meta property="og:title" content="ChoroplethMap-Bench">
+  <meta property="og:description" content="2,400 maps, 12,000 questions, and 22 frontier models for controlled evaluation of machine spatial understanding.">
+  <meta property="og:type" content="website">
+  <title>ChoroplethMap-Bench</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="ChoroplethMap-Bench home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      ChoroplethMap-Bench
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <a href="#overview">Overview</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#evaluation">Evaluation</a>
+      <a href="#results">Results</a>
+      <a href="#conclusion">Conclusion</a>
+      <a href="#resources">Resources</a>
+      <a href="#citation">Citation</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="eyebrow">A controlled benchmark for machine spatial understanding</p>
+        <h1>Do Maps Still Matter<br>for Machines?</h1>
+        <p class="hero-subtitle">Revisiting the Role of Choropleth Maps in Foundation Model Spatial Understanding</p>
+
+        <p class="authors">
+          Zhiwei Wei<sup>a,b</sup>, Yonghe Sun<sup>a,b</sup>, Zhenjia Liu<sup>a,b</sup>, Wenjia Xu<sup>c</sup>, Chao He<sup>d</sup>,<br>
+          Weihua Dong<sup>e</sup>, Chunbo Liu<sup>f</sup>, Hua Liao<sup>a,b,*</sup>
+        </p>
+        <div class="affiliations" aria-label="Author affiliations">
+          <p><sup>a</sup> School of Geographic Sciences, Hunan Normal University, Changsha, China</p>
+          <p><sup>b</sup> Hunan Key Laboratory of Geospatial Big Data Mining and Application, Changsha, China</p>
+          <p><sup>c</sup> School of Information and Communication Engineering, Beijing University of Posts and Telecommunications, Beijing, China</p>
+          <p><sup>d</sup> School of Artificial Intelligence and Big Data, Wuhan Business University, Wuhan, China</p>
+          <p><sup>e</sup> Advanced Interdisciplinary Institute of Satellite Applications, State Key Laboratory of Earth Surface Processes and Resource Ecology, Faculty of Geographical Science, Beijing Normal University, Beijing, China</p>
+          <p><sup>f</sup> The Aerospace Information Research Institute, Chinese Academy of Sciences, Beijing, China</p>
+          <p class="corresponding"><sup>*</sup> Corresponding author</p>
+        </div>
+
+        <div class="actions" aria-label="Project links">
+          <a class="button button-primary" href="https://arxiv.org/abs/2607.17999" target="_blank" rel="noreferrer">Paper</a>
+          <a class="button" href="https://github.com/Myantion/ChoroplethMap-Bench" target="_blank" rel="noreferrer">Code &amp; Data</a>
+          <a class="button" href="https://doi.org/10.48550/arXiv.2607.17999" target="_blank" rel="noreferrer">DOI</a>
+        </div>
+
+        <div class="metric-row" aria-label="Benchmark summary">
+          <div><strong>2,400</strong><span>synthetic maps</span></div>
+          <div><strong>12,000</strong><span>questions</span></div>
+          <div><strong>22</strong><span>frontier models</span></div>
+          <div><strong>5</strong><span>cognitive dimensions</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="section reveal">
+      <div class="section-heading">
+        <p class="section-index">01 / Overview</p>
+        <h2>Maps remain useful external representations for machines.</h2>
+      </div>
+      <div class="two-column intro-grid">
+        <p class="lead">Foundation models can directly process structured geographic data. We ask whether transforming the same information into a map still improves spatial reasoning.</p>
+        <p>ChoroplethMap-Bench compares three controlled input conditions: <strong>Data Only</strong>, <strong>Map Only</strong>, and <strong>Data + Map</strong>. Across 22 open-source and proprietary models, the combined representation produces the strongest overall performance, especially on tasks requiring global spatial understanding.</p>
+      </div>
+      <figure class="figure feature-figure">
+        <img src="assets/framework.png" alt="Overview of the ChoroplethMap-Bench construction and evaluation framework">
+        <figcaption>Benchmark construction and evaluation framework.</figcaption>
+      </figure>
+    </section>
+
+    <section id="benchmark" class="section section-tint reveal">
+      <div class="section-heading">
+        <p class="section-index">02 / Benchmark</p>
+        <h2>A cognitive progression from local reading to global delineation.</h2>
+      </div>
+
+      <div class="task-grid">
+        <article>
+          <span>D1</span>
+          <h3>Identify</h3>
+          <p>Retrieve a region from an attribute level, or determine the attribute level of a region.</p>
+        </article>
+        <article>
+          <span>D2</span>
+          <h3>Spatial Recognition</h3>
+          <p>Recognize directional and adjacency relations between geographic regions.</p>
+        </article>
+        <article>
+          <span>D3</span>
+          <h3>Compare</h3>
+          <p>Compare attribute values across a pair of regions.</p>
+        </article>
+        <article>
+          <span>D4</span>
+          <h3>Rank</h3>
+          <p>Find global or neighborhood-level extrema across the map.</p>
+        </article>
+        <article>
+          <span>D5</span>
+          <h3>Delineate</h3>
+          <p>Reason about clusters, gradients, rings, and other global spatial structures.</p>
+        </article>
+      </div>
+
+      <div class="design-copy">
+        <div>
+          <p class="kicker">Controlled cartographic design</p>
+          <h3>2 map types · 12 color hues · 4 spatial patterns</h3>
+        </div>
+        <p>The benchmark systematically varies discrete and continuous maps, color hue, and four spatial structures: Cluster, Trend, Structure, and Random. Each map is paired with its underlying GeoJSON representation for fair cross-condition comparison.</p>
+      </div>
+
+      <figure class="figure">
+        <img src="assets/map-generation.png" alt="Representative choropleth maps under cluster, trend, structure, and random spatial patterns">
+        <figcaption>Representative maps and benchmark questions across four spatial-distribution patterns.</figcaption>
+      </figure>
+    </section>
+
+    <section id="evaluation" class="section reveal">
+      <div class="section-heading">
+        <p class="section-index">03 / Evaluation</p>
+        <h2>The same geographic information, tested through three representations.</h2>
+      </div>
+
+      <div class="condition-flow" aria-label="Three controlled input conditions">
+        <article>
+          <span class="condition-label">Structured</span>
+          <h3>Data Only</h3>
+          <p>GeoJSON geometry and regional attributes are supplied as symbolic input.</p>
+        </article>
+        <span class="flow-plus" aria-hidden="true">+</span>
+        <article>
+          <span class="condition-label">Visual</span>
+          <h3>Map Only</h3>
+          <p>The rendered choropleth map is supplied without its underlying structured data.</p>
+        </article>
+        <span class="flow-equals" aria-hidden="true">=</span>
+        <article class="condition-combined">
+          <span class="condition-label">Combined</span>
+          <h3>Data + Map</h3>
+          <p>Both representations are supplied together to test whether maps add cognitive value.</p>
+        </article>
+      </div>
+
+      <div class="setup-facts">
+        <div><strong>22 models</strong><span>Open-source and proprietary foundation models</span></div>
+        <div><strong>Zero-shot</strong><span>Identical questions and controlled prompts across conditions</span></div>
+        <div><strong>Accuracy</strong><span>Measured over 12,000 questions for each input condition</span></div>
+      </div>
+    </section>
+
+    <section id="results" class="section section-tint reveal">
+      <div class="section-heading">
+        <p class="section-index">04 / Main results</p>
+        <h2>Combining data and maps produces the strongest overall performance.</h2>
+      </div>
+
+      <div class="result-lede">
+        <div class="headline-result">
+          <strong>20 / 22</strong>
+          <span>models perform best with<br><b>Data + Map</b></span>
+        </div>
+        <p>For discrete maps, Data + Map improves average accuracy by <strong>6.0 percentage points</strong> over Data Only and <strong>14.8 points</strong> over Map Only. For continuous maps, the corresponding gains are <strong>3.9</strong> and <strong>16.3 points</strong>.</p>
+      </div>
+
+      <div class="table-intro">
+        <div>
+          <p class="kicker">Overall accuracy (%)</p>
+          <h3>All evaluated models</h3>
+        </div>
+        <p>The highest score in each row is emphasized. The combined condition leads almost universally; only Qwen3.6-plus and Claude Opus 4.8 are marginally higher with Data Only.</p>
+      </div>
+
+      <div class="results-table-wrap">
+        <table class="results-table">
+          <thead><tr><th scope="col">Model</th><th scope="col">Data + Map</th><th scope="col">Data Only</th><th scope="col">Map Only</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Qwen3.5-9B</th><td class="best">61.3</td><td>52.6</td><td>42.7</td></tr>
+            <tr><th scope="row">Qwen3.5-4B</th><td class="best">60.8</td><td>47.2</td><td>47.4</td></tr>
+            <tr><th scope="row">Qwen3.5-2B</th><td class="best">43.4</td><td>37.4</td><td>37.2</td></tr>
+            <tr><th scope="row">Qwen3-VL-8B-Instruct</th><td class="best">40.6</td><td>37.4</td><td>34.8</td></tr>
+            <tr><th scope="row">Qwen3-VL-4B-Instruct</th><td class="best">33.7</td><td>32.3</td><td>30.6</td></tr>
+            <tr><th scope="row">Qwen3-VL-2B-Instruct</th><td class="best">29.6</td><td>28.1</td><td>29.2</td></tr>
+            <tr><th scope="row">Qwen2.5-VL-7B-Instruct</th><td class="best">39.9</td><td>33.3</td><td>34.1</td></tr>
+            <tr><th scope="row">Qwen2.5-VL-3B-Instruct</th><td class="best">31.9</td><td>29.8</td><td>29.5</td></tr>
+            <tr><th scope="row">GLM-4.6V-Flash</th><td class="best">64.2</td><td>40.3</td><td>50.7</td></tr>
+            <tr><th scope="row">InternVL3.5-8B</th><td class="best">64.9</td><td>60.8</td><td>46.9</td></tr>
+            <tr><th scope="row">InternVL3.5-4B</th><td class="best">61.0</td><td>52.3</td><td>47.7</td></tr>
+            <tr><th scope="row">InternVL3.5-2B</th><td class="best">43.1</td><td>39.6</td><td>36.0</td></tr>
+            <tr><th scope="row">Gemma-3-12B-IT</th><td class="best">50.6</td><td>48.0</td><td>30.3</td></tr>
+            <tr><th scope="row">Gemma-3-4B-IT</th><td class="best">33.4</td><td>32.6</td><td>28.9</td></tr>
+            <tr><th scope="row">MiMo-V2-Omni</th><td class="best">67.4</td><td>66.6</td><td>36.4</td></tr>
+          </tbody>
+          <tbody class="proprietary-group">
+            <tr><th scope="row">Gemini-2.5-Flash</th><td class="best">70.2</td><td>68.7</td><td>39.4</td></tr>
+            <tr><th scope="row">Qwen3.6-plus</th><td>68.3</td><td class="best">68.9</td><td>34.0</td></tr>
+            <tr><th scope="row">Doubao-Seed-2.0-lite</th><td class="best">69.5</td><td>66.6</td><td>42.4</td></tr>
+            <tr><th scope="row">Kimi-K2.5</th><td class="best">77.8</td><td>67.2</td><td>63.1</td></tr>
+            <tr class="top-model"><th scope="row">Gemini-3.5-Flash</th><td class="best">83.9</td><td>78.7</td><td>70.3</td></tr>
+            <tr><th scope="row">GPT-5.5</th><td class="best">76.0</td><td>74.7</td><td>44.5</td></tr>
+            <tr><th scope="row">Claude Opus 4.8</th><td>73.6</td><td class="best">73.8</td><td>47.1</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="result-notes">
+        <article><span>Best overall</span><strong>83.9%</strong><p>Gemini-3.5-Flash with Data + Map.</p></article>
+        <article><span>Largest gain over Data Only</span><strong>+23.9</strong><p>GLM-4.6V-Flash with Data + Map.</p></article>
+        <article><span>Representation gap</span><strong>Map Only lags</strong><p>Maps become most effective when grounded by symbolic data.</p></article>
+      </div>
+    </section>
+
+    <section id="findings" class="section reveal">
+      <div class="section-heading">
+        <p class="section-index">05 / What the results reveal</p>
+        <h2>Visual abstraction and symbolic data work best together.</h2>
+      </div>
+
+      <div class="finding-list">
+        <article>
+          <span class="finding-number">01</span>
+          <div><h3>Data + Map leads overall</h3><p>Twenty of the twenty-two evaluated models achieve their highest accuracy when structured data and rendered maps are provided together.</p></div>
+        </article>
+        <article>
+          <span class="finding-number">02</span>
+          <div><h3>The task hierarchy remains difficult</h3><p>Top models approach ceiling performance on D1 Identify, but performance drops on D5 Delineate. Gemini-3.5-Flash reaches 99.9% on D1 and 69.1% on D5, compared with 93.2% human accuracy on D5.</p></div>
+        </article>
+        <article>
+          <span class="finding-number">03</span>
+          <div><h3>Design changes machine performance</h3><p>Twenty-one of 22 models perform better on discrete maps. Median accuracy falls from Cluster (65.6%) and Structure (63.5%) to Trend (62.2%) and Random (54.0%).</p></div>
+        </article>
+        <article>
+          <span class="finding-number">04</span>
+          <div><h3>Hue effects are limited</h3><p>Across twelve tested hues, within-model variation remains below 2.5 percentage points, suggesting that spatial organization matters more than hue choice.</p></div>
+        </article>
+      </div>
+
+      <figure class="figure feature-figure">
+        <img src="assets/design-analysis.png" alt="Analysis of map type, color hue, and spatial pattern effects on model accuracy">
+        <figcaption>Effects of cartographic design factors under the Data + Map condition.</figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="assets/case-analysis.png" alt="Case studies comparing model reasoning with Data and Map versus Data Only inputs">
+        <figcaption>Case studies showing how maps support local directional reasoning and global trend recognition.</figcaption>
+      </figure>
+
+      <div class="robustness-block">
+        <div class="table-intro">
+          <div><p class="kicker">Robustness checks</p><h3>Prompting and language shift the level, not the conclusion.</h3></div>
+          <p>Tree-of-Thought improves Kimi-K2.5 across all three input conditions, while English prompts provide modest gains for both tested proprietary models. In every comparison, the combined representation remains strongest.</p>
+        </div>
+        <div class="robustness-grid">
+          <div>
+            <h4>Kimi-K2.5 prompting</h4>
+            <div class="mini-table" role="table" aria-label="Kimi-K2.5 prompting results">
+              <div role="row"><span role="columnheader">Prompt</span><span role="columnheader">D+M</span><span role="columnheader">Data</span><span role="columnheader">Map</span></div>
+              <div role="row"><span role="cell">Direct</span><b role="cell">77.8</b><span role="cell">67.2</span><span role="cell">63.1</span></div>
+              <div role="row"><span role="cell">Chain-of-Thought</span><b role="cell">76.6</b><span role="cell">68.0</span><span role="cell">56.9</span></div>
+              <div role="row"><span role="cell">Tree-of-Thought</span><b role="cell">80.4</b><span role="cell">71.6</span><span role="cell">68.2</span></div>
+            </div>
+          </div>
+          <div>
+            <h4>Prompt language</h4>
+            <div class="mini-table" role="table" aria-label="Prompt language results">
+              <div role="row"><span role="columnheader">Model / language</span><span role="columnheader">D+M</span><span role="columnheader">Data</span><span role="columnheader">Map</span></div>
+              <div role="row"><span role="cell">Gemini-2.5 / Chinese</span><b role="cell">70.2</b><span role="cell">68.7</span><span role="cell">39.4</span></div>
+              <div role="row"><span role="cell">Gemini-2.5 / English</span><b role="cell">72.7</b><span role="cell">69.8</span><span role="cell">40.0</span></div>
+              <div role="row"><span role="cell">Kimi-K2.5 / Chinese</span><b role="cell">77.8</b><span role="cell">67.2</span><span role="cell">63.1</span></div>
+              <div role="row"><span role="cell">Kimi-K2.5 / English</span><b role="cell">79.7</b><span role="cell">69.1</span><span role="cell">66.9</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="conclusion" class="conclusion-section reveal">
+      <div class="conclusion-inner">
+        <p class="section-index">06 / Conclusion</p>
+        <h2>Maps remain valuable external representations for machine spatial understanding.</h2>
+        <div class="conclusion-copy">
+          <p>Foundation models can increasingly reason from raw structured information, but that does not make cartographic abstraction obsolete. Across the benchmark, maps provide a compact global view that complements precise symbolic records and reduces the burden of reconstructing spatial structure from data alone.</p>
+          <p>The strongest representation is therefore not visual or symbolic in isolation, but their combination. This result motivates a new research direction: maps designed not only for human readers, but also for machine perception, reasoning, and decision support.</p>
+        </div>
+        <div class="conclusion-principles" aria-label="Three concluding principles">
+          <div><span>01</span><strong>Representations matter</strong><p>Data + Map leads for 20 of 22 evaluated models.</p></div>
+          <div><span>02</span><strong>Abstraction still helps</strong><p>Maps expose global patterns that are costly to recover from records.</p></div>
+          <div><span>03</span><strong>Design for machines</strong><p>Cartographic choices shape model performance and reliability.</p></div>
+        </div>
+        <p class="conclusion-final">Maps are not being replaced by foundation models. They are becoming part of how foundation models think spatially.</p>
+      </div>
+    </section>
+
+    <section id="resources" class="section section-dark reveal">
+      <div class="section-heading">
+        <p class="section-index">07 / Resources</p>
+        <h2>Explore the paper and benchmark.</h2>
+      </div>
+      <div class="resource-grid">
+        <a href="https://arxiv.org/pdf/2607.17999" target="_blank" rel="noreferrer"><span>PDF</span><strong>Read the paper</strong><small>arXiv:2607.17999</small></a>
+        <a href="https://github.com/Myantion/ChoroplethMap-Bench" target="_blank" rel="noreferrer"><span>GitHub</span><strong>Browse the repository</strong><small>Maps, GeoJSON, and questions</small></a>
+        <a href="https://github.com/Myantion/ChoroplethMap-Bench/blob/main/map_task_evaluation.xlsx" target="_blank" rel="noreferrer"><span>Benchmark</span><strong>View task annotations</strong><small>Questions, options, and answers</small></a>
+      </div>
+    </section>
+
+    <section id="citation" class="section citation-section reveal">
+      <div class="section-heading">
+        <p class="section-index">08 / Citation</p>
+        <h2>Cite ChoroplethMap-Bench.</h2>
+      </div>
+      <div class="citation-box">
+        <pre><code id="bibtex">@article{wei2026maps,
+  title={Do Maps Still Matter for Machines: Revisiting the Role of Choropleth Maps in Foundation Model Spatial Understanding},
+  author={Wei, Zhiwei and Sun, Yonghe and Liu, Zhenjia and Xu, Wenjia and He, Chao and Dong, Weihua and Liu, Chunbo and Liao, Hua},
+  journal={arXiv preprint arXiv:2607.17999},
+  year={2026},
+  doi={10.48550/arXiv.2607.17999}
+}</code></pre>
+        <button id="copy-citation" class="button" type="button">Copy BibTeX</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>ChoroplethMap-Bench · 2026</p>
+    <p>Built for open research in cartography and machine spatial intelligence.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
