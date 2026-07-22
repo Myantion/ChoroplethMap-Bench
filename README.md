@@ -35,6 +35,9 @@ If you use ChoroplethMap-Bench in your research, please cite:
   doi={10.48550/arXiv.2607.17999}
 }
 ```
+### Data and Code Citation
+
+Wei, Z., Sun, Y., Liu, Z., Xu, W., Dong, W., Liu, C., Liao, H., 2026. *ChoroplethMap-Bench: A benchmark for evaluating the cognitive compression and spatial reasoning of MLLMs using 2,400 synthetic choropleth maps.*
 
 ## License
 
