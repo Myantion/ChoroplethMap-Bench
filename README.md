@@ -15,6 +15,12 @@ The benchmark contains:
 - arXiv: https://arxiv.org/abs/2607.17999
 - DOI: https://doi.org/10.48550/arXiv.2607.17999
 
+## Project Page
+
+For an interactive overview of the benchmark, experimental setup, main results, and conclusions, visit:
+
+**https://myantion.github.io/ChoroplethMap-Bench/**
+
 ## Repository Structure
 
 - `map/`: discrete choropleth maps
